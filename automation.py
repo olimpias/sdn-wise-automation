@@ -31,7 +31,7 @@ with open(filePath,'r+') as f:
     f.truncate()
 
 time.sleep(5)
-procForecast = subprocess.Popen("./executables/forecast")
+procForecast = subprocess.Popen(["./executables/forecast"])
 print("PID for forecast:", procForecast.pid)
 procCtrl = subprocess.Popen(['java', '-jar', 'executables/sdn-wise-ctrl-4.0.1-SNAPSHOT-jar-with-dependencies.jar', 'executables/config.json'])
 print("PID fore ctrl:", procCtrl.pid)
