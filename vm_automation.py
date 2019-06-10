@@ -7,8 +7,10 @@ hostName = "localhost"
 hostPort = 9001
 
 
-pathFormat = "-nogui=/home/user/Desktop/simulation_topology/{number}/SDN-WISE-{number}-T{id}.csc"
-RunPathFormat = "-nogui=/home/user/Desktop/simulation_topology/{number}/tmp/SDN-WISE-{number}-T{id}.csc"
+pathFormat = "/home/user/Desktop/simulation_topology/{number}/SDN-WISE-{number}-T{id}.csc"
+RunPathFormat = "/home/user/Desktop/simulation_topology/{number}/tmp/SDN-WISE-{number}-T{id}.csc"
+
+RunNoGUIPathFormat = "-nogui=" + RunPathFormat
 
 class MyServer(BaseHTTPRequestHandler):
     procCtrl = None
@@ -29,7 +31,7 @@ class MyServer(BaseHTTPRequestHandler):
     def run_cooja(self, ids):
         MyServer.procCtrl = subprocess.Popen(
             ['java', '-jar', '/home/user/contiki/tools/cooja/dist/coojar.jar',
-             RunPathFormat.format(number=ids[0], id=ids[1])])
+             RunNoGUIPathFormat.format(number=ids[0], id=ids[1])])
         print("PID fore ctrl:", MyServer.procCtrl.pid)
 
 

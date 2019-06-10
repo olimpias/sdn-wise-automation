@@ -45,7 +45,7 @@ def executeController(numberOfNodes, numberOfMoteNotes, numberOfCommandedNodes, 
     procCtrl = subprocess.Popen(['java', '-jar', 'executables/sdn-wise-ctrl-4.0.1-SNAPSHOT-jar-with-dependencies.jar', 'executables/config.json'])
     print("PID fore ctrl:", procCtrl.pid)
     time.sleep(5)
-    if triggerVMAutomation(numberOfMoteNotes, topologyLabel - 1):
+    if triggerVMAutomation(numberOfMoteNotes, topologyLabel):
         exitCode = procCtrl.wait()
         if exitCode != 0:
             print("Problem occurred at CTRL")
@@ -53,7 +53,7 @@ def executeController(numberOfNodes, numberOfMoteNotes, numberOfCommandedNodes, 
             print("Ctrl is finished successfully")
     else:
         print("Starting VM automation is failed")
-        procCtrl.kill()
+    procCtrl.kill()
     procForecast.kill()
     print("Forecast is killed.")
 
@@ -100,7 +100,7 @@ if len(sys.argv) < 2:
 remoteIpAddress = sys.argv[1]
 
 remoteURL = remoteFormatURL % (remoteIpAddress)
-
+print("Remote URL "+ remoteURL)
 for index, weight in enumerate(rssi_weights):
     values = []
     for topo_index, topo in enumerate(num_topologies):
