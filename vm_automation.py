@@ -30,9 +30,9 @@ class MyServer(BaseHTTPRequestHandler):
 
     def run_cooja(self, ids):
         MyServer.procCtrl = subprocess.Popen(
-            ['java', '-jar', '/home/user/contiki/tools/cooja/dist/coojar.jar',
+            ['java', '-jar', '/home/user/contiki/tools/cooja/dist/cooja.jar',
              RunNoGUIPathFormat.format(number=ids[0], id=ids[1])])
-        print("PID fore ctrl:", MyServer.procCtrl.pid)
+        print("PID fore ctrl:", MyServer.procCtrl.pid);
 
 
 myServer = HTTPServer((hostName, hostPort), MyServer)

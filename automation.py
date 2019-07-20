@@ -10,8 +10,8 @@ import http.client
 filePath = "executables/config.json"
 
 topology_iteration_count = 10
-label_num_topologies = ["10","13", "15", "18", "20"]
-num_topologies = ["11","14", "16", "19", "21"]
+label_num_topologies = ["10","13", "15", "18", "20","22","25","28","30"]
+num_topologies = ["11","14", "16", "19", "21","23","26","29","31"]
 rssi_weights = ["0.050","0.500", "1.000"]
 battery_weights = ["0.95", "0.500","0"]
 
@@ -74,14 +74,15 @@ def triggerVMAutomation(topo, id):
 def is_time_value_acceptable(num_topology, weight,topologyLabel):
     path = str.format("%s/%s/" % (num_topology, weight))
     files = os.listdir(path)
+    searchText = "t%d.data" % (topologyLabel)
     for file in files:
-        if file.find("t%d" % (topologyLabel)) == 0:
+        if searchText in file:
             with open(path + file) as f:
                 content = f.readlines()
                 for line in content:
                     if line.startswith("Spend time: "):
                         val = int(re.search(r'\d+', line).group(0))
-                        return val > 500
+                        return val > 375
     return False
 
 def remove_file(num_topology, weight,topology_label):
